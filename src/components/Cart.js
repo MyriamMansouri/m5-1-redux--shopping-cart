@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "./Button";
 import CartItem from "./CartItem";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { getStoreItemArray } from "../reducers";
 
 const Cart = () => {
+  const [total, setTotal] = React.useState(0);
+  const storeItems = useSelector(getStoreItemArray);
+  useEffect(() => {
+    if (storeItems.length> 0) {
+      setTotal(
+        storeItems.map((item) => item.price).reduce((val, acc) => val + acc)
+      );
+    }
+  }, [storeItems]);
   return (
     <Wrapper>
       <div>
         <Title>Your Cart</Title>
-        <Items>0 items</Items>
-        <CartItem />
+        <Items>{storeItems.length} items</Items>
+        {storeItems.map((item) => (
+          <CartItem key={item.id} item={item} />
+        ))}
       </div>
 
       <Total>
-        Total: <Amount>$2.89</Amount>
+        Total: <Amount>${total}</Amount>
         <BuyBtn>Purchase</BuyBtn>
       </Total>
     </Wrapper>
@@ -21,15 +34,14 @@ const Cart = () => {
 };
 
 const Wrapper = styled.div`
-  box-sizing:border-box;
+  box-sizing: border-box;
   padding: 25px;
   position: sticky;
   top: 0;
-  height:100vh;
+  min-height: 100vh;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
-  
 `;
 const Title = styled.h2`
   font-size: 1.5rem;
@@ -43,6 +55,7 @@ const Items = styled.div`
 const Total = styled.div`
   float: bottom;
   font-size: 1.5rem;
+  margin-top: 10px;
 `;
 const Amount = styled.span`
   font-weight: bold;

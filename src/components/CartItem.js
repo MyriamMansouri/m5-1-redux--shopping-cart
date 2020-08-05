@@ -5,6 +5,7 @@ import { X } from "./Icons";
 const Wrapper = styled.div`
   border: rgba(255, 255, 255, 0.1) 2px dashed;
   position: relative;
+  margin-bottom:10px;
 `;
 const IconBtn = styled.button`
   position: absolute;
@@ -35,14 +36,14 @@ const Quantity = styled.span`
   border-bottom: solid 3px white;
 `;
 
-const CartItem = ({ quantity = 1 }) => {
+const CartItem = ({ quantity = 1, item }) => {
   return (
     <Wrapper>
       <IconBtn>
         <X />
       </IconBtn>
 
-      <TitleWrapper>Item</TitleWrapper>
+      <TitleWrapper>{item.title}</TitleWrapper>
       <QuantityWrapper>
         Quantity: <Quantity>{quantity}</Quantity>
       </QuantityWrapper>
