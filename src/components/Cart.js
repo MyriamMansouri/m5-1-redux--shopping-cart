@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "./Button";
 import CartItem from "./CartItem";
 import styled from "styled-components";
@@ -6,15 +6,8 @@ import { useSelector } from "react-redux";
 import { getStoreItemArray } from "../reducers";
 
 const Cart = () => {
-  const [total, setTotal] = React.useState(0);
   const storeItems = useSelector(getStoreItemArray);
-  useEffect(() => {
-    if (storeItems.length> 0) {
-      setTotal(
-        storeItems.map((item) => item.price).reduce((val, acc) => val + acc)
-      );
-    }
-  }, [storeItems]);
+
   return (
     <Wrapper>
       <div>
@@ -26,7 +19,15 @@ const Cart = () => {
       </div>
 
       <Total>
-        Total: <Amount>${total}</Amount>
+        Total:
+        <Amount>
+          $
+          {storeItems.length > 0
+            ? storeItems
+                .map((item) => item.price)
+                .reduce((val, acc) => val + acc)
+            : 0}
+        </Amount>
         <BuyBtn>Purchase</BuyBtn>
       </Total>
     </Wrapper>

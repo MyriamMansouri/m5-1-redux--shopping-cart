@@ -1,18 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { X } from "./Icons";
+import { useDispatch } from "react-redux";
+import { removeItem } from "../actions";
 
 const Wrapper = styled.div`
   border: rgba(255, 255, 255, 0.1) 2px dashed;
   position: relative;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 `;
 const IconBtn = styled.button`
   position: absolute;
-  background-color:inherit;
-  color:inherit;
-  border:none;
-  cursor:pointer;
+  background-color: inherit;
+  color: inherit;
+  border: none;
+  cursor: pointer;
   top: 5px;
   right: 5px;
 `;
@@ -37,9 +39,14 @@ const Quantity = styled.span`
 `;
 
 const CartItem = ({ quantity = 1, item }) => {
+  const dispatch = useDispatch();
   return (
     <Wrapper>
-      <IconBtn>
+      <IconBtn
+        onClick={() => {
+          dispatch(removeItem(item));
+        }}
+      >
         <X />
       </IconBtn>
 
