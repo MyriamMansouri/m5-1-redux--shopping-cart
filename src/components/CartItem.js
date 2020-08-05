@@ -38,7 +38,7 @@ const Quantity = styled.span`
   border-bottom: solid 3px white;
 `;
 
-const CartItem = ({ quantity = 1, item }) => {
+const CartItem = ({ item }) => {
   const dispatch = useDispatch();
   return (
     <Wrapper>
@@ -52,7 +52,7 @@ const CartItem = ({ quantity = 1, item }) => {
 
       <TitleWrapper>{item.title}</TitleWrapper>
       <QuantityWrapper>
-        Quantity: <Quantity>{quantity}</Quantity>
+        Quantity: <Quantity>{item.quantity}</Quantity>
       </QuantityWrapper>
     </Wrapper>
   );

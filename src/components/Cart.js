@@ -12,7 +12,14 @@ const Cart = () => {
     <Wrapper>
       <div>
         <Title>Your Cart</Title>
-        <Items>{storeItems.length} items</Items>
+        <Items>
+          {storeItems.length > 0
+            ? storeItems
+                .map((item) => item.quantity)
+                .reduce((val, acc) => val + acc)
+            : 0}
+          &nbsp;items
+        </Items>
         {storeItems.map((item) => (
           <CartItem key={item.id} item={item} />
         ))}
@@ -24,7 +31,7 @@ const Cart = () => {
           $
           {storeItems.length > 0
             ? storeItems
-                .map((item) => item.price)
+                .map((item) => item.price * item.quantity)
                 .reduce((val, acc) => val + acc)
             : 0}
         </Amount>
