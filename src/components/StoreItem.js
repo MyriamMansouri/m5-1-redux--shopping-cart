@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import Button from './Button';
+import Button from "./Button";
 
 const StoreItem = ({ id, title, src, price }) => {
-  const formattedPrice = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
+  const formattedPrice = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
   }).format(price / 100);
 
   return (
@@ -40,6 +40,10 @@ const ImageWrapper = styled.div`
 const Image = styled.img`
   display: block;
   max-width: 100%;
+  transition: transform 200ms linear;
+  &:hover {
+    transform: rotate(15deg) scale(1.2);
+  }
 `;
 
 const Title = styled.h2`
