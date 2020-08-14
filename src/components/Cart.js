@@ -8,6 +8,14 @@ import { getStoreItemArray } from "../reducers";
 const Cart = () => {
   const storeItems = useSelector(getStoreItemArray);
 
+  const formatPrice = (price) => {
+    const formattedPrice = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(price / 100);
+    return formattedPrice;
+  };
+
   return (
     <Wrapper>
       <div>
@@ -28,11 +36,12 @@ const Cart = () => {
       <Total>
         Total:
         <Amount>
-          $
           {storeItems.length > 0
-            ? storeItems
-                .map((item) => item.price * item.quantity)
-                .reduce((val, acc) => val + acc)
+            ? formatPrice(
+                storeItems
+                  .map((item) => item.price * item.quantity)
+                  .reduce((val, acc) => val + acc)
+              )
             : 0}
         </Amount>
         <BuyBtn>Purchase</BuyBtn>

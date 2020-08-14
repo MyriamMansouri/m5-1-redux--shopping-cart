@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Quantity from './Quantity'
 import { X } from "./Icons";
 import { useDispatch } from "react-redux";
 import { removeItem } from "../actions";
@@ -25,18 +26,7 @@ const LineWrapper = styled.div`
 const TitleWrapper = styled(LineWrapper)`
   font-size: 1.5rem;
 `;
-const QuantityWrapper = styled(LineWrapper)`
-  background-color: hsl(295, 36.7%, 15%);
-  color: rgb(204, 204, 204);
-  font-size: 1.2rem;
-`;
-const Quantity = styled.span`
-  display: inline-block;
-  margin-left: 10px;
-  color: white;
-  padding: 3px 8px;
-  border-bottom: solid 3px white;
-`;
+
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
@@ -49,11 +39,9 @@ const CartItem = ({ item }) => {
       >
         <X />
       </IconBtn>
-
+      
       <TitleWrapper>{item.title}</TitleWrapper>
-      <QuantityWrapper>
-        Quantity: <Quantity>{item.quantity}</Quantity>
-      </QuantityWrapper>
+      <Quantity id={item.id} quantity={item.quantity} />
     </Wrapper>
   );
 };
